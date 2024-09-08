@@ -16,4 +16,10 @@ public class Session
     {
         Tickets = new List<Ticket>();
     }
+
+    public bool IsFull()
+    {
+        var seats = CinemaHall.Seats.Count;
+        return Tickets.Count >= seats;
+    }
 }

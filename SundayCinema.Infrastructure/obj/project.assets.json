@@ -1,11 +1,48 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "SundayCinema.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "SundayCinema.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SundayCinema.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SundayCinema.Application.dll": {}
+        }
+      },
+      "SundayCinema.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/SundayCinema.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SundayCinema.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "SundayCinema.Application/1.0.0": {
+      "type": "project",
+      "path": "../SundayCinema.Application/SundayCinema.Application.csproj",
+      "msbuildProject": "../SundayCinema.Application/SundayCinema.Application.csproj"
+    },
+    "SundayCinema.Domain/1.0.0": {
+      "type": "project",
+      "path": "../SundayCinema.Domain/SundayCinema.Domain.csproj",
+      "msbuildProject": "../SundayCinema.Domain/SundayCinema.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "SundayCinema.Application >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\sunda\\.nuget\\packages\\": {}
@@ -34,7 +71,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\C#\\SundayCinema\\SundayCinema.Application\\SundayCinema.Application.csproj": {
+              "projectPath": "D:\\C#\\SundayCinema\\SundayCinema.Application\\SundayCinema.Application.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
