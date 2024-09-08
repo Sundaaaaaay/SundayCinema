@@ -1,0 +1,6 @@
+@SundayCinema.API_HostAddress = http://localhost:5293
+
+GET {{SundayCinema.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
