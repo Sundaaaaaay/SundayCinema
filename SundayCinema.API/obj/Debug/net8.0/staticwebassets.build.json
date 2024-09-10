@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "jGv5LFpBL8rPPgXoRrYMLHwYVvgjCw0Ma0X1H0GJWJc=",
+  "Source": "SundayCinema.API",
+  "BasePath": "_content/SundayCinema.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

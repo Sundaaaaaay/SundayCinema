@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SundayCinema.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b3e3442db94cf181e7085c9aa08b9ae64e1dd1d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb941c41545d015c22f35ba157254c487d9c3ba1")]
 [assembly: System.Reflection.AssemblyProductAttribute("SundayCinema.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SundayCinema.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

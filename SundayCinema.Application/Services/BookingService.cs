@@ -1,21 +1,22 @@
-﻿using SundayCinema.Application.Interfaces;
-using SundayCinema.Application.Interfaces.Repositories;
+﻿using SundayCinema.Application.Dtos;
+using SundayCinema.Application.Interfaces;
 using SundayCinema.Domain.Entities;
 
 namespace SundayCinema.Application.Services;
 
 public class BookingService : IBookingService
 {
-    private readonly ISessionRepository _sessionRepo;
+    private readonly IUnitOfWork _unitOfWork;
     
-    public BookingService(ISessionRepository sessionRepo)
+    public BookingService(IUnitOfWork unitOfWork)
     {
-        _sessionRepo = sessionRepo;
+        _unitOfWork = unitOfWork;
     }
     
-    public Ticket BookTicketAsync(int sessionId, int seat, string buyerName)
+    public async Task<Ticket?> BookTicketAsync(CreateTicketDto ticketDto)
     {
-        var session = _sessionRepo.GetByIdAsync(sessionId);
+        var session = await _unitOfWork.Sessions.GetByIdAsync(ticketDto.SessionId);
+        
         
         if(session == null)
             throw new Exception("Session not found");
@@ -23,9 +24,11 @@ public class BookingService : IBookingService
         if(session.IsFull())
             throw new Exception("Session is full");
         
-        if(session.Tickets.Any(t => t.SeatId == seat))
+        if(session.Tickets.Any(t => t.SeatId == ticketDto.SeatId))
             throw new Exception("Seat is already booked");
-            
-        throw new NotImplementedException();
+        
+        var ticket = await _unitOfWork.Tickets.CreateTicketAsync(ticketDto);
+        
+        return ticket;
     }
 }

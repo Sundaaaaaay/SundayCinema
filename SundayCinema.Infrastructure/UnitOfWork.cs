@@ -1,9 +1,8 @@
 ﻿using SundayCinema.Application.Interfaces;
 using SundayCinema.Application.Interfaces.Repositories;
 using SundayCinema.Infrastructure.Data;
-using SundayCinema.Infrastructure.Persistence.Repositories;
 
-namespace SundayCinema.Infrastructure.Persistence;
+namespace SundayCinema.Infrastructure;
 
 public class UnitOfWork : IUnitOfWork
 {
@@ -12,10 +11,10 @@ public class UnitOfWork : IUnitOfWork
     public ISessionRepository Sessions { get; private set; }
     public ITicketRepository Tickets { get; private set; }
 
-    public UnitOfWork(ApplicationDbContext context)
+    public UnitOfWork(ApplicationDbContext context, ISessionRepository session, ITicketRepository tickets)
     {
         _context = context;
-        Sessions = new SessionRepository(_context);
-        Tickets = new TicketRepository(_context);
+        Sessions = session;
+        Tickets = tickets;
     }
 }

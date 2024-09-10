@@ -2,7 +2,7 @@
 using SundayCinema.Domain.Entities;
 using SundayCinema.Infrastructure.Data;
 
-namespace SundayCinema.Infrastructure.Persistence.Repositories;
+namespace SundayCinema.Infrastructure.Repositories;
 
 public class SessionRepository : ISessionRepository
 {
@@ -12,8 +12,8 @@ public class SessionRepository : ISessionRepository
     {
         _context = context;
     }
-    
-    public Session GetByIdAsync(int id)
+
+    public async Task<Session> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }

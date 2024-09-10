@@ -1,8 +1,9 @@
-﻿using SundayCinema.Domain.Entities;
+﻿using SundayCinema.Application.Dtos;
+using SundayCinema.Domain.Entities;
 
 namespace SundayCinema.Application.Interfaces;
 
 public interface IBookingService
 {
-    Ticket BookTicketAsync(int sessionId, int seat, string buyerName);
+    Task<Ticket?> BookTicketAsync(CreateTicketDto ticketDto);
 }
