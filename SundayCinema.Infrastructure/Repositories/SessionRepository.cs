@@ -17,4 +17,14 @@ public class SessionRepository : ISessionRepository
     {
         throw new NotImplementedException();
     }
+
+    public async Task<Session?> DeleteAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<List<Session?>?> GetCompletedSessionsAsync()
+    {
+        throw new NotImplementedException();
+    }
 }
