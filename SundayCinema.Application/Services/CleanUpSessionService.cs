@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SundayCinema.Application.Interfaces;
 using SundayCinema.Application.Interfaces.Repositories;
 
 namespace SundayCinema.Application.Services;

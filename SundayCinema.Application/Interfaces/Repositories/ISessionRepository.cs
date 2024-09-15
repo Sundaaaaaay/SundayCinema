@@ -6,5 +6,5 @@ public interface ISessionRepository
 { 
     Task<Session?> GetByIdAsync(int id);
     Task<Session?> DeleteAsync(int id);
-    Task<List<Session?>?> GetCompletedSessionsAsync();
+    Task<IEnumerable<Session?>?> GetCompletedSessionsAsync();
 }

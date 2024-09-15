@@ -10,11 +10,14 @@ public class UnitOfWork : IUnitOfWork
     
     public ISessionRepository Sessions { get; private set; }
     public ITicketRepository Tickets { get; private set; }
+    
+    public ISeatRepository Seats { get; private set; }
 
-    public UnitOfWork(ApplicationDbContext context, ISessionRepository session, ITicketRepository tickets)
+    public UnitOfWork(ApplicationDbContext context, ISessionRepository session, ITicketRepository tickets, ISeatRepository seats)
     {
         _context = context;
         Sessions = session;
         Tickets = tickets;
+        Seats = seats;
     }
 }

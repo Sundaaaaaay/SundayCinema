@@ -5,5 +5,5 @@ namespace SundayCinema.Application.Interfaces;
 
 public interface IBookingService
 {
-    Task<Ticket?> BookTicketAsync(CreateTicketDto createTicketDto);
+    Task<Ticket?> BookTicketAsync(Ticket createTicket);
 }

@@ -61,11 +61,19 @@ public class SessionRepository : ISessionRepository
 
     public async Task<Session?> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var session = await _context.Sessions.FirstOrDefaultAsync(x => x.Id == id);
+        _context.Sessions.Remove(session);
+        await _context.SaveChangesAsync();
+        
+        return session;
     }
 
-    public async Task<List<Session?>?> GetCompletedSessionsAsync()
+    public async Task<IEnumerable<Session?>?> GetCompletedSessionsAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Sessions
+            .Include(s => s.Tickets)
+            .Where(s => s.EndTime < DateTime.UtcNow)
+            .ToListAsync();
+
     }
 }

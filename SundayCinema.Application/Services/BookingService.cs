@@ -16,25 +16,38 @@ public class BookingService : IBookingService
         _logger = logger;
     }
     
-    public async Task<Ticket?> BookTicketAsync(CreateTicketDto createTicketDto)
+    public async Task<Ticket?> BookTicketAsync(Ticket createTicket)
     {
         try
         {
-            var session = await _unitOfWork.Sessions.GetByIdAsync(createTicketDto.SessionId);
+            var session = await _unitOfWork.Sessions.GetByIdAsync(createTicket.SessionId);
 
 
             if (session == null)
                 throw new Exception("Session not found");
 
-            if (session.IsFull())
+            if (!session.IsFull())
                 throw new Exception("Session is full");
 
-            if (session.Tickets.Any(t => t.SeatId == createTicketDto.SeatId))
-                throw new Exception("Seat is already booked");
+            var seat = await _unitOfWork.Seats.GetSeatByIdAsync(createTicket.SeatId);
 
-            var ticket = await _unitOfWork.Tickets.CreateTicketAsync(createTicketDto);
+            if (seat == null)
+                throw new Exception("Seat not found");
+            
+            if(!seat.IsAvailable)
+                throw new Exception("Seat is now available");
+            
+            try
+            {
+                var ticket = await _unitOfWork.Tickets.CreateTicketAsync(createTicket);
 
-            return ticket;
+                return ticket;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                throw new Exception($"Error while booking ticket: {ex.Message}");
+            }
         }
         catch (Exception ex)
         {

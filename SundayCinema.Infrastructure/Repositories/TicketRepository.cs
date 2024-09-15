@@ -14,9 +14,12 @@ public class TicketRepository : ITicketRepository
     {
         _context = context;
     }
-    public async Task<Ticket> CreateTicketAsync(CreateTicketDto ticketDto)
+    public async Task<Ticket> CreateTicketAsync(Ticket ticket)
     {
-        throw new NotImplementedException();
+        _context.Tickets.Add(ticket);
+        await _context.SaveChangesAsync();
+        
+        return ticket;
     }
 
     public async Task<Ticket?> GetTicketByIdAsync(int id)
