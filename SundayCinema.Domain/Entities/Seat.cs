@@ -4,7 +4,7 @@ public class Seat
 {
     public int Id { get; set; }
     public int CinemaHallId { get; set; }
-    public bool IsAvailable { get; set; }
+    public bool IsAvailable { get; set; } = false;
     
     public CinemaHall CinemaHall { get; set; }
 }
