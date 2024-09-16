@@ -76,4 +76,16 @@ public class SessionRepository : ISessionRepository
             .ToListAsync();
 
     }
+
+    public async Task<Session?> CreateAsync(Session session)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<IEnumerable<Session?>?> GetAllSessionsAsync()
+    {
+        var sessions = await _context.Sessions.ToListAsync();
+
+        return sessions;
+    }
 }
