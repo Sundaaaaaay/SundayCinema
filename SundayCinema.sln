@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SundayCinema.Domain", "SundayCinema.Domain\SundayCinema.Domain.csproj", "{BD3C403B-A49A-4D17-B330-55C8F57A6BF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{BD3C403B-A49A-4D17-B330-55C8F57A6BF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SundayCinema.Application", "SundayCinema.Application\SundayCinema.Application.csproj", "{8EDEDAFA-27E7-49BF-A15F-1BDEF85CFE6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{8EDEDAFA-27E7-49BF-A15F-1BDEF85CFE6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SundayCinema.Infrastructure", "SundayCinema.Infrastructure\SundayCinema.Infrastructure.csproj", "{5883AC15-389B-44F2-A5BD-C1475BBE3212}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5883AC15-389B-44F2-A5BD-C1475BBE3212}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SundayCinema.Presentation", "SundayCinema.Presentation\SundayCinema.Presentation.csproj", "{2424701D-B357-4334-805D-6E44404632CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{2424701D-B357-4334-805D-6E44404632CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
