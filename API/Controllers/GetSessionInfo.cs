@@ -20,8 +20,11 @@ public class GetSessionInfo : ControllerBase
     {
         var sessions = await _unitOfWork.Sessions.GetAllSessionsAsync();
 
-        var sessionsDto = sessions.Select(s => s.ToSessionResponseDto()).ToList();
+        if(sessions == null)
+            return NotFound();
         
-        return Ok(sessionsDto);
+        //var sessionsDto = sessions.Select(s => s.ToSessionResponseDto()).ToList();
+        
+        return Ok(sessions);
     }
 }

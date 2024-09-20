@@ -21,7 +21,7 @@ public class CleanUpSessionService : IHostedService
     public Task StartAsync(CancellationToken cancellationToken)
     {
         _logger.LogInformation("CleanUpSessionService is starting.");
-        _timer = new Timer(DeleteCompletedSessions, null, TimeSpan.Zero, TimeSpan.FromHours(24));
+        _timer = new Timer(DeleteCompletedSessions, null, TimeSpan.Zero, TimeSpan.FromMinutes(30));
 
         return Task.CompletedTask;
     }

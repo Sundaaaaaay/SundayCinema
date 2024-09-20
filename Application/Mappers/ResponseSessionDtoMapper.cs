@@ -7,6 +7,11 @@ public static class ResponseSessionDtoMapper
 {
     public static ResponseSesionDto ToSessionResponseDto(this Session session)
     {
+        if (session == null)
+        {
+            throw new ArgumentNullException(nameof(session), "Session cannot be null.");
+        }
+        
         return new ResponseSesionDto
         {
             Id = session.Id,

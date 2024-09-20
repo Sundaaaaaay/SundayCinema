@@ -7,4 +7,9 @@ public class Seat
     public bool IsAvailable { get; set; } = true;
     
     public CinemaHall CinemaHall { get; set; }
+
+    public void ChangeAvailability()
+    {
+        IsAvailable = false;
+    }
 }

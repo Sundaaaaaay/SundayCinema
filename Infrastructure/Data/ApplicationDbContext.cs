@@ -36,7 +36,7 @@ public class ApplicationDbContext : DbContext
             .HasMany(s => s.Tickets)
             .WithOne(s => s.Session)
             .HasForeignKey(s => s.SessionId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict);
         
         modelBuilder.Entity<Movie>()
             .HasMany(m => m.Sessions)
