@@ -21,7 +21,7 @@ public class SeatRepositoryv: ISeatRepository
         return seat;
     }
 
-    public async Task ChangeAvailability(int seatId, bool isAvailable)
+    public async Task ChangeAvailabilityAsync(int seatId, bool isAvailable)
     {
         var seat = await _context.Seats.FirstOrDefaultAsync(s => s.Id == seatId);
         

@@ -40,7 +40,7 @@ public class BookingService : IBookingService
             {
                 var ticket = await _unitOfWork.Tickets.CreateTicketAsync(createTicket);
                 
-                await _unitOfWork.Seats.ChangeAvailability(seat.Id, seat.IsAvailable);
+                await _unitOfWork.Seats.ChangeAvailabilityAsync(seat.Id, seat.IsAvailable);
                 
                 return ticket;
             }
