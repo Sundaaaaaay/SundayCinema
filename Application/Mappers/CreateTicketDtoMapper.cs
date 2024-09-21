@@ -9,9 +9,9 @@ public static class CreateTicketDtoMapper
     {
         return new Ticket
         {
-            SeatId = createTicketDto.SeatId,
             SessionId = createTicketDto.SessionId,
-            BookedBy = createTicketDto.BookedBy
+            BookedBy = createTicketDto.BookedBy,
+            SeatNumber = createTicketDto.SeatNumber,
         };
     }
 }

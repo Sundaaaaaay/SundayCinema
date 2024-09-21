@@ -17,9 +17,7 @@ public class TicketRepository : ITicketRepository
     }
     public async Task<Ticket> CreateTicketAsync(Ticket ticket)
     {
-        _context.Tickets.Add(ticket);
-        var ticketModel = await _context.Tickets.FirstOrDefaultAsync(x => x.Id == ticket.Id);
-        _context.Seats.FirstOrDefaultAsync(x => x.Id == ticket.SeatId);
+        await _context.Tickets.AddAsync(ticket);
         await _context.SaveChangesAsync();
         
         return ticket;
@@ -33,5 +31,15 @@ public class TicketRepository : ITicketRepository
     public async Task<Ticket?> DeleteTicketAsync(int id)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<IQueryable<Ticket>> GetAllTicketsAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<bool> CheckSeatsAvailabilityAsync(int seatNumber)
+    {
+        return await _context.Tickets.AnyAsync(t => t.SeatNumber == seatNumber);
     }
 }

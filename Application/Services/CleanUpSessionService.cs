@@ -21,22 +21,22 @@ public class CleanUpSessionService : IHostedService
     public Task StartAsync(CancellationToken cancellationToken)
     {
         _logger.LogInformation("CleanUpSessionService is starting.");
-        _timer = new Timer(DeleteCompletedSessions, null, TimeSpan.Zero, TimeSpan.FromMinutes(30));
+        _timer = new Timer(async state => await DeleteCompletedSessions(state), null, TimeSpan.Zero, TimeSpan.FromMinutes(30));
 
         return Task.CompletedTask;
     }
     
-    private void DeleteCompletedSessions(object state)
+    private async Task DeleteCompletedSessions(object state)
     {
         using (var scope = _serviceProvider.CreateScope())
         {
             var sessionRepo = scope.ServiceProvider.GetRequiredService<ISessionRepository>();
 
-            var completedSessions = sessionRepo.GetCompletedSessionsAsync().Result;
+            var completedSessions = await sessionRepo.GetCompletedSessionsAsync();
 
             foreach (var session in completedSessions)
             {
-                sessionRepo.DeleteAsync(session.Id).Wait();
+                await sessionRepo.DeleteAsync(session.Id);
                 _logger.LogInformation($"Deleted completed session: {session.Id}");
             }
 

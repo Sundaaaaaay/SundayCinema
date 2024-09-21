@@ -6,5 +6,4 @@ public interface IUnitOfWork
 {
     ISessionRepository Sessions { get; }
     ITicketRepository Tickets { get; }
-    ISeatRepository Seats { get; }
 }

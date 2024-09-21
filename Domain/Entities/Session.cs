@@ -6,20 +6,29 @@ public class Session
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
     public int MovieId { get; set; }
-    public int CinemaHallId { get; set; }
+    public int HallId { get; set; }
     public ICollection<Ticket> Tickets { get; set; }
-    
-    public CinemaHall CinemaHall { get; set; }
+    public int TotalSeats { get; set; }
     public Movie Movie { get; set; }
 
     public Session()
     {
         Tickets = new List<Ticket>();
     }
+    
 
     public bool IsFull()
     {
-        var seats = CinemaHall.Seats.Count;
-        return Tickets.Count >= seats;
+        return Tickets.Count >= TotalSeats;
+    }
+
+    public bool IsSeatExist(int seatNumber)
+    {
+        if (seatNumber < 1 || seatNumber > TotalSeats)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

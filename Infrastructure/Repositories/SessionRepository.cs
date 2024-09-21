@@ -32,12 +32,9 @@ public class SessionRepository : ISessionRepository
                 s.StartTime,
                 s.EndTime,
                 MovieName = s.Movie.Name,
-                CinemaHall = new
-                {
-                    s.CinemaHall.Id,
-                    s.CinemaHall.TotalSeats
-                },
-                TicketsCount = s.Tickets.Count
+                TicketsCount = s.Tickets.Count,
+                s.TotalSeats,
+                
             })
             .FirstOrDefaultAsync();
         
@@ -46,15 +43,11 @@ public class SessionRepository : ISessionRepository
             Id = session.Id,
             StartTime = session.StartTime,
             EndTime = session.EndTime,
+            TotalSeats = session.TotalSeats,
             Movie = new Movie
             {
                 Name = session.MovieName
             },
-            CinemaHall = new CinemaHall
-            {
-                Id = session.CinemaHall.Id,
-                TotalSeats = session.CinemaHall.TotalSeats
-            }
         } : null;
 
     }
@@ -68,13 +61,12 @@ public class SessionRepository : ISessionRepository
         return session;
     }
 
-    public async Task<IEnumerable<Session?>?> GetCompletedSessionsAsync()
+    public async Task<IEnumerable<Session>> GetCompletedSessionsAsync()
     {
         return await _context.Sessions
             .Include(s => s.Tickets)
             .Where(s => s.EndTime < DateTime.UtcNow)
             .ToListAsync();
-
     }
 
     public async Task<Session?> CreateAsync(Session session)

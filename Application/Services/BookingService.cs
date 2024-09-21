@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using System.Runtime.CompilerServices;
+using Application.Interfaces;
 using Microsoft.Extensions.Logging;
 using Application.Dtos;
 using Domain.Entities;
@@ -16,31 +17,28 @@ public class BookingService : IBookingService
         _logger = logger;
     }
     
-    public async Task<Ticket?> BookTicketAsync(Ticket createTicket)
+    public async Task<Ticket?> BookTicketAsync(Ticket createTicketModel)
     {
         try
         {
-            var session = await _unitOfWork.Sessions.GetByIdAsync(createTicket.SessionId);
+            var session = await _unitOfWork.Sessions.GetByIdAsync(createTicketModel.SessionId);
                 
             if (session == null)
                 throw new Exception("Session not found");
 
-            if (!session.IsFull())
-                throw new Exception("Session is full");
+            if(session.IsFull())
+                throw new Exception($"Session is full, total size {session.TotalSeats}");
 
-            var seat = await _unitOfWork.Seats.GetSeatByIdAsync(createTicket.SeatId);
-
-            if (seat == null)
-                throw new Exception("Seat not found");
+            if (!session.IsSeatExist(createTicketModel.SeatNumber))
+                throw new Exception(
+                    $"Seat {createTicketModel.SeatNumber} doesnt exist, total seats: {session.TotalSeats}");
             
-            if(!seat.IsAvailable)
-                throw new Exception("Seat is not available");
+            if(await _unitOfWork.Tickets.CheckSeatsAvailabilityAsync(createTicketModel.SeatNumber))
+                throw new Exception($"Seat {createTicketModel.SeatNumber} is already booked");
 
             try
             {
-                var ticket = await _unitOfWork.Tickets.CreateTicketAsync(createTicket);
-                
-                await _unitOfWork.Seats.ChangeAvailabilityAsync(seat.Id, seat.IsAvailable);
+                var ticket = await _unitOfWork.Tickets.CreateTicketAsync(createTicketModel);
                 
                 return ticket;
             }
