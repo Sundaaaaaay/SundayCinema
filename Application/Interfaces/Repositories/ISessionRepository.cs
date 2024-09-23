@@ -4,9 +4,9 @@ namespace Application.Interfaces.Repositories;
 
 public interface ISessionRepository
 { 
-    Task<Session?> GetByIdAsync(int id);
-    Task<Session?> DeleteAsync(int id);
-    Task<IEnumerable<Session?>?> GetCompletedSessionsAsync();
-    Task<Session?> CreateAsync(Session session);
+    Task<Session?> GetSessionByIdAsync(int id);
+    Task<Session?> DeleteSessionAsync(int id);
+    Task<IEnumerable<Session>> GetCompletedSessionsAsync();
+    Task<Session> CreateSessionAsync(Session session);
     Task<IEnumerable<Session?>?> GetAllSessionsAsync();
 }

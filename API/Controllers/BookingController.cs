@@ -22,9 +22,7 @@ public class BookingController : ControllerBase
         if (ticketDto == null)
             return BadRequest();
         
-        var ticketModel = ticketDto.CreateTicketMapper();
-        
-        await _bookingService.BookTicketAsync(ticketModel);
+        await _bookingService.BookTicketAsync(ticketDto);
             
         return Ok(ticketDto);
     }

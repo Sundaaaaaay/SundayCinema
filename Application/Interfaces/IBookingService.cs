@@ -5,5 +5,5 @@ namespace Application.Interfaces;
 
 public interface IBookingService
 {
-    Task<Ticket?> BookTicketAsync(Ticket createTicketModel);
+    Task<Ticket?> BookTicketAsync(CreateTicketDto ticketDto);
 }

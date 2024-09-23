@@ -40,6 +40,7 @@ public class TicketRepository : ITicketRepository
 
     public async Task<bool> CheckSeatsAvailabilityAsync(int seatNumber)
     {
-        return await _context.Tickets.AnyAsync(t => t.SeatNumber == seatNumber);
+        return await _context.Tickets
+            .AnyAsync(t => t.SeatNumber == seatNumber);
     }
 }

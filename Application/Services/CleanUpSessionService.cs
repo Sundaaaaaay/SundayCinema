@@ -36,7 +36,7 @@ public class CleanUpSessionService : IHostedService
 
             foreach (var session in completedSessions)
             {
-                await sessionRepo.DeleteAsync(session.Id);
+                await sessionRepo.DeleteSessionAsync(session.Id);
                 _logger.LogInformation($"Deleted completed session: {session.Id}");
             }
 

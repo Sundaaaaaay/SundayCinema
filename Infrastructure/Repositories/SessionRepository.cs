@@ -14,16 +14,8 @@ public class SessionRepository : ISessionRepository
         _context = context;
     }
 
-    public async Task<Session?> GetByIdAsync(int id)
+    public async Task<Session?> GetSessionByIdAsync(int id)
     {
-        // var session = await _context.Sessions
-        //     .Include(s => s.Movie)
-        //         .ThenInclude(m => m.Genre)
-        //     .Include(s => s.CinemaHall)
-        //         .ThenInclude(c => c.Seats)
-        //     .Include(s => s.Tickets)
-        //     .FirstOrDefaultAsync(x => x.Id == id);
-
         var session = await _context.Sessions
             .Where(s => s.Id == id)
             .Select(s => new
@@ -34,7 +26,7 @@ public class SessionRepository : ISessionRepository
                 MovieName = s.Movie.Name,
                 TicketsCount = s.Tickets.Count,
                 s.TotalSeats,
-                
+                s.HallId
             })
             .FirstOrDefaultAsync();
         
@@ -48,13 +40,15 @@ public class SessionRepository : ISessionRepository
             {
                 Name = session.MovieName
             },
+            HallId = session.HallId
         } : null;
 
     }
 
-    public async Task<Session?> DeleteAsync(int id)
+    public async Task<Session?> DeleteSessionAsync(int id)
     {
-        var session = await _context.Sessions.FirstOrDefaultAsync(x => x.Id == id);
+        var session = await _context.Sessions
+            .FirstOrDefaultAsync(x => x.Id == id);
         _context.Sessions.Remove(session);
         await _context.SaveChangesAsync();
         
@@ -68,16 +62,22 @@ public class SessionRepository : ISessionRepository
             .Where(s => s.EndTime < DateTime.UtcNow)
             .ToListAsync();
     }
-
-    public async Task<Session?> CreateAsync(Session session)
+    
+    public async Task<Session> CreateSessionAsync(Session session)
     {
-        throw new NotImplementedException();
+        await _context.Sessions.AddAsync(session);
+        await _context.SaveChangesAsync();
+
+        return session;
     }
 
     public async Task<IEnumerable<Session>> GetAllSessionsAsync()
     {
-        var sessions = await _context.Sessions.ToListAsync();
-
+        var skipNumber = (1 - 1) * 10;
+        
+        var sessions = await _context.Sessions
+            .ToListAsync();
+        
         return sessions;
     }
 }

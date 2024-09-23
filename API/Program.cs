@@ -15,9 +15,10 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ISessionRepository, SessionRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
-builder.Services.AddHostedService<CleanUpSessionService>();
 
+builder.Services.AddHostedService<CleanUpSessionService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
+builder.Services.AddScoped<ISessionService, SessionService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {

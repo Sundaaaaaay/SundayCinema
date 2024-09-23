@@ -7,8 +7,8 @@ public class Session
     public DateTime EndTime { get; set; }
     public int MovieId { get; set; }
     public int HallId { get; set; }
-    public ICollection<Ticket> Tickets { get; set; }
     public int TotalSeats { get; set; }
+    public ICollection<Ticket> Tickets { get; set; }
     public Movie Movie { get; set; }
 
     public Session()

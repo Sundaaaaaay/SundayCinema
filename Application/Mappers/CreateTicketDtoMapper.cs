@@ -5,7 +5,7 @@ namespace Application.Mappers;
 
 public static class CreateTicketDtoMapper
 {
-    public static Ticket CreateTicketMapper(this CreateTicketDto createTicketDto)
+    public static Ticket ToCreateTicketDto(this CreateTicketDto createTicketDto)
     {
         return new Ticket
         {

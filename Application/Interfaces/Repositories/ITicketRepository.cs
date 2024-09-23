@@ -5,7 +5,7 @@ namespace Application.Interfaces.Repositories;
 
 public interface ITicketRepository
 {
-    Task<Ticket?> CreateTicketAsync(Ticket ticketDto);
+    Task<Ticket> CreateTicketAsync(Ticket ticketDto);
     Task<Ticket?> GetTicketByIdAsync(int id);
     Task<Ticket?> DeleteTicketAsync(int id);
     Task<IQueryable<Ticket>> GetAllTicketsAsync();

@@ -2,6 +2,7 @@
 using Application.Interfaces;
 using Microsoft.Extensions.Logging;
 using Application.Dtos;
+using Application.Mappers;
 using Domain.Entities;
 
 namespace Application.Services;
@@ -17,29 +18,31 @@ public class BookingService : IBookingService
         _logger = logger;
     }
     
-    public async Task<Ticket?> BookTicketAsync(Ticket createTicketModel)
+    public async Task<Ticket?> BookTicketAsync(CreateTicketDto ticketDto)
     {
         try
         {
-            var session = await _unitOfWork.Sessions.GetByIdAsync(createTicketModel.SessionId);
-                
+            var session = await _unitOfWork.Sessions.GetSessionByIdAsync(ticketDto.SessionId);
+
             if (session == null)
                 throw new Exception("Session not found");
 
-            if(session.IsFull())
-                throw new Exception($"Session is full, total size {session.TotalSeats}");
+            if (session.IsFull())
+                throw new Exception($"Session is full, total seats {session.TotalSeats}");
 
-            if (!session.IsSeatExist(createTicketModel.SeatNumber))
+            if (!session.IsSeatExist(ticketDto.SeatNumber))
                 throw new Exception(
-                    $"Seat {createTicketModel.SeatNumber} doesnt exist, total seats: {session.TotalSeats}");
-            
-            if(await _unitOfWork.Tickets.CheckSeatsAvailabilityAsync(createTicketModel.SeatNumber))
-                throw new Exception($"Seat {createTicketModel.SeatNumber} is already booked");
+                    $"Seat {ticketDto.SeatNumber} doesnt exist, total seats: {session.TotalSeats}");
 
+            if (await _unitOfWork.Tickets.CheckSeatsAvailabilityAsync(ticketDto.SeatNumber))
+                throw new Exception($"Seat {ticketDto.SeatNumber} is already booked");
+
+            var ticketModel = ticketDto.ToCreateTicketDto();
+            
             try
             {
-                var ticket = await _unitOfWork.Tickets.CreateTicketAsync(createTicketModel);
-                
+                var ticket = await _unitOfWork.Tickets.CreateTicketAsync(ticketModel);
+
                 return ticket;
             }
             catch (Exception e)
@@ -47,6 +50,11 @@ public class BookingService : IBookingService
                 _logger.LogError(e, e.Message);
                 throw new Exception($"Ticket creation failed: {e.Message}");
             }
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            _logger.LogError(ex, ex.Message);
+            throw new Exception($"Problems with : {ex.Message}");
         }
         catch (Exception ex)
         {
