@@ -6,7 +6,7 @@ using Domain.Entities;
 
 namespace SundayCinema.Presentation.Controllers;
 
-[Route("sundaycinema/getsessioninfo")]
+[Route("sundaycinema/sessions")]
 [ApiController]
 public class SessionController : ControllerBase
 {

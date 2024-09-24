@@ -15,7 +15,7 @@ public class SessionService : ISessionService
         _sessionRepository = sessionRepository;
     }
     
-    public async Task<IEnumerable<ResponseSesionDto>> GetAllSessionsAsync()
+    public async Task<IEnumerable<ResponseSesionDto?>> GetAllSessionsAsync()
     {
         try
         {
@@ -27,7 +27,7 @@ public class SessionService : ISessionService
         }
     }
 
-    public async Task<Session> CreateSessionAsync(CreateSessionDto sessionDto)
+    public async Task<Session?> CreateSessionAsync(CreateSessionDto sessionDto)
     {
         if(sessionDto == null)
             throw new ArgumentNullException(nameof(sessionDto));
