@@ -15,7 +15,7 @@ public class SessionService : ISessionService
         _sessionRepository = sessionRepository;
     }
     
-    public async Task<IEnumerable<Session>> GetAllSessionsAsync()
+    public async Task<IEnumerable<ResponseSesionDto>> GetAllSessionsAsync()
     {
         try
         {

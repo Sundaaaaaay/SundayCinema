@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Dtos;
+using Domain.Entities;
 
 namespace Application.Interfaces.Repositories;
 
@@ -8,5 +9,5 @@ public interface ISessionRepository
     Task<Session?> DeleteSessionAsync(int id);
     Task<IEnumerable<Session>> GetCompletedSessionsAsync();
     Task<Session> CreateSessionAsync(Session session);
-    Task<IEnumerable<Session?>?> GetAllSessionsAsync();
+    Task<IEnumerable<ResponseSesionDto>?> GetAllSessionsAsync();
 }

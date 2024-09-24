@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Application.Dtos;
+using Microsoft.EntityFrameworkCore;
 using Application.Interfaces.Repositories;
 using Infrastructure.Data;
 using Domain.Entities;
@@ -71,13 +72,19 @@ public class SessionRepository : ISessionRepository
         return session;
     }
 
-    public async Task<IEnumerable<Session>> GetAllSessionsAsync()
+    public async Task<IEnumerable<ResponseSesionDto>> GetAllSessionsAsync()
     {
-        var skipNumber = (1 - 1) * 10;
-        
         var sessions = await _context.Sessions
+            .Select(s => new ResponseSesionDto
+            {
+               Id = s.Id,
+               StartTime = s.StartTime,
+               EndTime = s.EndTime,
+               TotalSeats = s.TotalSeats,
+               MovieName = s.Movie.Name
+            })    
             .ToListAsync();
-        
+
         return sessions;
     }
 }

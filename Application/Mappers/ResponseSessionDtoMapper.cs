@@ -17,7 +17,9 @@ public static class ResponseSessionDtoMapper
             Id = session.Id,
             MovieName = session.Movie.Name,
             StartTime = session.StartTime,
+            CinemaHallId = session.HallId,
             EndTime = session.EndTime,
+            TotalSeats = session.TotalSeats,
         };
     }
 }

@@ -7,4 +7,5 @@ public class ResponseSesionDto
     public DateTime EndTime { get; set; }
     public int CinemaHallId { get; set; }
     public string MovieName { get; set; }
+    public int TotalSeats { get; set; }
 }

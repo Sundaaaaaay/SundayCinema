@@ -5,6 +5,6 @@ namespace Application.Interfaces;
 
 public interface ISessionService
 {
-    Task<IEnumerable<Session?>> GetAllSessionsAsync();
+    Task<IEnumerable<ResponseSesionDto?>> GetAllSessionsAsync();
     Task<Session?> CreateSessionAsync(CreateSessionDto sessionDto);
 }

@@ -1,6 +1,7 @@
 ﻿using Application.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Application.Interfaces;
+using Application.Mappers;
 using Domain.Entities;
 
 namespace SundayCinema.Presentation.Controllers;
@@ -23,7 +24,7 @@ public class SessionController : ControllerBase
 
         if (sessions == null)
             return NotFound();
-        
+
         return Ok(sessions);
     }
 
