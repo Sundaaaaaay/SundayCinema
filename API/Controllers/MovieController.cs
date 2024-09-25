@@ -27,4 +27,10 @@ public class MovieController : ControllerBase
     {
         return Ok(await _movieService.CreateMovieAsync(movieDto));
     }
+
+    [HttpDelete]
+    public async Task<IActionResult> DeleteMovie(int id)
+    {
+        return Ok(await _movieService.DeleteMovieAsync(id));
+    }
 }

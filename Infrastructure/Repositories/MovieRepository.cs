@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
@@ -35,6 +36,11 @@ public class MovieRepository : IMovieRepository
 
     public async Task<Movie?> DeleteMovieAsync(int movieId)
     {
-        throw new NotImplementedException();
+        var movie = await _context.Movies.FirstOrDefaultAsync(s => s.Id == movieId);
+        
+        _context.Movies.Remove(movie);
+        await _context.SaveChangesAsync();
+        
+        return movie;
     }
 }

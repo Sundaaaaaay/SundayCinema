@@ -51,6 +51,15 @@ public class MovieService : IMovieService
 
     public async Task<Movie?> DeleteMovieAsync(int movieId)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var movie = await _unitOfWork.Movies.DeleteMovieAsync(movieId);
+            
+            return movie;
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
     }
 }
