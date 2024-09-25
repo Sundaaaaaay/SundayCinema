@@ -1,4 +1,6 @@
-﻿using Application.Interfaces;
+﻿using Application.Dtos;
+using Application.Interfaces;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SundayCinema.Presentation.Controllers;
@@ -18,5 +20,11 @@ public class MovieController : ControllerBase
     public async Task<IActionResult> GetAllMovies()
     {
         return Ok(await _movieService.GetAllMoviesAsync());
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateMovie([FromBody] CreateMovieDto movieDto)
+    {
+        return Ok(await _movieService.CreateMovieAsync(movieDto));
     }
 }

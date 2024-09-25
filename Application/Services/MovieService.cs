@@ -1,5 +1,6 @@
 ﻿using Application.Dtos;
 using Application.Interfaces;
+using Application.Mappers;
 using Domain.Entities;
 
 namespace Application.Services;
@@ -32,9 +33,20 @@ public class MovieService : IMovieService
         throw new NotImplementedException();
     }
 
-    public async Task<CreateMovieDto?> CreateMovieAsync(Movie movie)
+    public async Task<CreateMovieDto?> CreateMovieAsync(CreateMovieDto movieDto)
     {
-        throw new NotImplementedException();
+        var movieModel = movieDto.ToCreateMovieDto();
+
+        try
+        {
+           var movie = await _unitOfWork.Movies.CreateMovieAsync(movieModel);
+
+           return movieDto;
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
     }
 
     public async Task<Movie?> DeleteMovieAsync(int movieId)
