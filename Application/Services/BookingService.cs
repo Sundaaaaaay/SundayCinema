@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Microsoft.Extensions.Logging;
 using Application.Dtos;
 using Application.Mappers;

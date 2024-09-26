@@ -5,6 +5,7 @@ using Application.Services;
 using Infrastructure;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,12 @@ builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.ClearProviders();
+    loggingBuilder.AddNLogWeb();
 });
 
 var app = builder.Build();

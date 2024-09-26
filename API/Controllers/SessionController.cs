@@ -11,10 +11,12 @@ namespace SundayCinema.Presentation.Controllers;
 public class SessionController : ControllerBase
 {
     private readonly ISessionService _sessionService;
+    private readonly ILogger<SessionController> _logger;
 
-    public SessionController(ISessionService sessionService)
+    public SessionController(ISessionService sessionService, ILogger<SessionController> logger)
     {
         _sessionService = sessionService;
+        _logger = logger;
     }
 
     [HttpGet]
@@ -24,7 +26,7 @@ public class SessionController : ControllerBase
 
         if (sessions == null)
             return NotFound();
-
+        
         return Ok(sessions);
     }
 
